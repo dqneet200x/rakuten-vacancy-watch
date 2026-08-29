@@ -32,6 +32,14 @@ class SecretMaskFilter(logging.Filter):
                 text = text.replace(secret, "****")
         return text
 
+    def _mask_arg(self, value):
+        """文字列だけを伏せ字にし、それ以外は型を保ったまま返す。
+
+        数値まで文字列にしてしまうと "%d" の書式指定が TypeError になり、
+        ログが一切出力されなくなる。
+        """
+        return self._mask(value) if isinstance(value, str) else value
+
     def filter(self, record: logging.LogRecord) -> bool:
         if not self._secrets:
             return True
@@ -39,9 +47,9 @@ class SecretMaskFilter(logging.Filter):
             record.msg = self._mask(str(record.msg))
             if record.args:
                 if isinstance(record.args, dict):
-                    record.args = {k: self._mask(str(v)) for k, v in record.args.items()}
+                    record.args = {k: self._mask_arg(v) for k, v in record.args.items()}
                 else:
-                    record.args = tuple(self._mask(str(a)) for a in record.args)
+                    record.args = tuple(self._mask_arg(a) for a in record.args)
         except Exception:  # ログ処理で本体を落とさない
             pass
         return True
