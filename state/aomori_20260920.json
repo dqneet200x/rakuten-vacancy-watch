@@ -1,15 +1,7 @@
 {
   "watch_id": "aomori_20260920",
-  "last_count": 1,
-  "hotels": [
-    {
-      "hotel_no": "200696",
-      "name": "スローハウス青森",
-      "price": 30160,
-      "url": "https://travel.rakuten.co.jp/HOTEL/200696/200696.html",
-      "review_average": 4.5
-    }
-  ],
+  "last_count": 0,
+  "hotels": [],
   "last_notified_hash": "",
   "last_checked_at": "2026-08-30T01:12:40+09:00",
   "last_change_at": "2026-08-30T01:12:40+09:00",
