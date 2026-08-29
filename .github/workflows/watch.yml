@@ -15,6 +15,10 @@ on:
         description: "メールを送らず、結果の確認だけ行う"
         type: boolean
         default: false
+      test_mail:
+        description: "監視せず、テストメールを1通だけ送る（疎通確認用）"
+        type: boolean
+        default: false
 
 # state ファイルをリポジトリに書き戻すために必要
 permissions:
@@ -53,10 +57,17 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           NOTIFY_TO: ${{ secrets.NOTIFY_TO }}
-        run: python main.py ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: |
+          if [ "${{ inputs.test_mail }}" = "true" ]; then
+            python main.py --test-mail
+          elif [ "${{ inputs.dry_run }}" = "true" ]; then
+            python main.py --dry-run
+          else
+            python main.py
+          fi
 
       - name: 変化があれば state を保存する
-        if: ${{ !inputs.dry_run }}
+        if: ${{ !inputs.dry_run && !inputs.test_mail }}
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
