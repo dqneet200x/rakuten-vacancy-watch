@@ -1,0 +1,38 @@
+name: テスト
+
+# 無料枠を無駄に使わないよう、コードを変更したときだけ走らせる。
+# state ファイルの更新（監視の自動コミット）では動かない。
+on:
+  push:
+    paths:
+      - "**.py"
+      - "templates/**"
+      - "config.yaml"
+      - "requirements.txt"
+      - ".github/workflows/test.yml"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存パッケージをインストール
+        run: pip install --quiet -r requirements.txt pytest
+
+      - name: テストを実行
+        run: pytest tests -q
+
+      - name: 設定ファイルとテンプレートが壊れていないか確認
+        env:
+          TZ: Asia/Tokyo
+        run: python main.py --preview-mail

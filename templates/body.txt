@@ -1,0 +1,61 @@
+{# ============================================================
+   メール本文（テキスト版）のテンプレート
+   自由に書き換えてください。使える変数は subject.txt の先頭を参照。
+
+   宿のリスト（added_hotels / removed_hotels / current_hotels）は
+   for でまわせます。各要素は次の項目を持ちます:
+     h.name         宿名
+     h.price        料金（数値。不明なら None）
+     h.price_text   料金の3桁区切り表記（不明なら「―」）
+     h.url          宿のページURL
+     h.review_text  レビュー平均（不明なら「―」）
+     h.hotel_no     楽天の宿番号
+
+   書き換えたら次のコマンドで見た目を確認できます:
+     python main.py --preview-mail
+   ============================================================ #}
+{{ area_name }} の空室状況が変化しました。
+
+■ 条件
+  エリア　: {{ area_name }}
+  宿泊日　: {{ checkin }} 〜 {{ checkout }}（{{ nights }}泊）
+  人数　　: 大人 {{ adult_num }}名 / {{ room_num }}部屋
+
+■ 変化
+  {{ prev_count }}件 → {{ curr_count }}件（{{ diff_text }}／{{ direction }}）
+{% if min_price is not none %}
+  現在の最安　: {{ min_price_text }}円
+{% endif %}
+
+{% if added_hotels %}
+■ 新しく空室が出た宿（{{ added_hotels | length }}件）
+{% for h in added_hotels %}
+  ・{{ h.name }}　{{ h.price_text }}円
+{% if h.url %}
+    {{ h.url }}
+{% endif %}
+{% endfor %}
+
+{% endif %}
+{% if removed_hotels %}
+■ 空室がなくなった宿（{{ removed_hotels | length }}件）
+{% for h in removed_hotels %}
+  ・{{ h.name }}
+{% endfor %}
+
+{% endif %}
+{% if current_hotels %}
+■ 現在空室のある宿（{{ current_hotels | length }}件）
+{% for h in current_hotels %}
+  {{ loop.index }}. {{ h.name }}　{{ h.price_text }}円
+{% endfor %}
+{% else %}
+■ 現在空室のある宿はありません。
+{% endif %}
+
+■ 楽天トラベルで見る
+{{ search_url }}
+
+------------------------------------------------------------
+本メールは自動送信です。
+確認日時: {{ now.strftime('%Y-%m-%d %H:%M') }}（日本時間）

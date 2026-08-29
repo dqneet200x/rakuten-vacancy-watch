@@ -1,0 +1,24 @@
+# 秘密情報 — 絶対にコミットしない
+.env
+*.env
+!.env.example
+
+# ログ
+logs/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# プレビュー出力（一時ファイル）
+preview_mail.html

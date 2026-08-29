@@ -1,0 +1,52 @@
+# ============================================================
+# 楽天トラベル 空室監視 — 設定ファイル
+# ここを書き換えれば、監視する日付・エリア・人数を変更できます。
+# Python のコードを触る必要はありません。
+# ============================================================
+
+mail:
+  # 差出人の表示名（メールの「送信者」欄に出る名前）
+  from_name: "楽天トラベル空室監視"
+  # HTML版のメールも送るか（false にするとテキストのみ）
+  send_html: true
+
+# すべての監視条件に共通する既定値。個別に上書きできます。
+defaults:
+  adult_num: 2          # 大人の人数
+  room_num: 1           # 部屋数
+  hits: 30              # 1ページあたりの取得件数（最大30）
+  max_pages: 10         # 最大何ページまで取得するか
+  # どんな変化のときに通知するか
+  #   both     … 増えても減っても通知（既定）
+  #   increase … 増えたときだけ通知
+  #   decrease … 減ったときだけ通知
+  notify_on: both
+  # 件数が同じでも「宿の顔ぶれ」が入れ替わったら通知するか
+  notify_on_hotel_change: true
+
+# 監視したい条件のリスト。いくつでも追加できます。
+watches:
+  - id: aomori_20260920            # 半角英数字。state ファイル名になります
+    name: "青森市周辺"              # メール本文に出る表示名（自由に変更可）
+    enabled: true
+
+    # --- エリア指定 ---
+    # 楽天トラベルの検索URLのパラメータと対応しています
+    #   f_dai  → large_class_code
+    #   f_chu  → middle_class_code
+    #   f_shou → small_class_code
+    #   f_sai  → detail_class_code（空でOK）
+    large_class_code: japan
+    middle_class_code: aomori
+    small_class_code: aomori
+    detail_class_code: ""
+
+    # --- 宿泊日（YYYY-MM-DD）---
+    checkin: "2026-09-20"
+    checkout: "2026-09-21"
+
+    # --- 人数・部屋数 ---
+    adult_num: 2
+    room_num: 1
+
+    notify_on: both

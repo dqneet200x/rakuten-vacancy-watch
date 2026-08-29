@@ -1,0 +1,82 @@
+{# ============================================================
+   メール本文（HTML版）のテンプレート
+   使える変数は subject.txt の先頭を参照してください。
+   config.yaml の mail.send_html を false にすると、こちらは送られません。
+   ============================================================ #}
+<div style="font-family:-apple-system,'Hiragino Kaku Gothic ProN','Meiryo',sans-serif;font-size:15px;line-height:1.7;color:#222;">
+
+  <p style="margin:0 0 16px;font-size:17px;font-weight:bold;">
+    {{ direction_mark }} {{ area_name }} の空室状況が変化しました
+  </p>
+
+  <table cellpadding="0" cellspacing="0" style="margin:0 0 20px;border-collapse:collapse;">
+    <tr>
+      <td style="padding:4px 14px 4px 0;color:#666;">エリア</td>
+      <td style="padding:4px 0;">{{ area_name }}</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 14px 4px 0;color:#666;">宿泊日</td>
+      <td style="padding:4px 0;">{{ checkin }} 〜 {{ checkout }}（{{ nights }}泊）</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 14px 4px 0;color:#666;">人数</td>
+      <td style="padding:4px 0;">大人 {{ adult_num }}名 / {{ room_num }}部屋</td>
+    </tr>
+  </table>
+
+  <p style="margin:0 0 20px;padding:14px 16px;background:#f5f7fa;border-left:4px solid #bf0000;">
+    <span style="font-size:20px;font-weight:bold;">{{ prev_count }}件 → {{ curr_count }}件</span>
+    <span style="margin-left:8px;color:#666;">（{{ diff_text }}／{{ direction }}）</span>
+    {% if min_price is not none %}
+    <br><span style="color:#666;">現在の最安 {{ min_price_text }}円</span>
+    {% endif %}
+  </p>
+
+  {% if added_hotels %}
+  <p style="margin:0 0 8px;font-weight:bold;">新しく空室が出た宿（{{ added_hotels | length }}件）</p>
+  <ul style="margin:0 0 20px;padding-left:20px;">
+    {% for h in added_hotels %}
+    <li style="margin-bottom:6px;">
+      {% if h.url %}<a href="{{ h.url }}" style="color:#0b57d0;">{{ h.name }}</a>{% else %}{{ h.name }}{% endif %}
+      <span style="color:#666;">{{ h.price_text }}円</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if removed_hotels %}
+  <p style="margin:0 0 8px;font-weight:bold;">空室がなくなった宿（{{ removed_hotels | length }}件）</p>
+  <ul style="margin:0 0 20px;padding-left:20px;color:#888;">
+    {% for h in removed_hotels %}
+    <li style="margin-bottom:6px;">{{ h.name }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if current_hotels %}
+  <p style="margin:0 0 8px;font-weight:bold;">現在空室のある宿（{{ current_hotels | length }}件）</p>
+  <ol style="margin:0 0 20px;padding-left:22px;">
+    {% for h in current_hotels %}
+    <li style="margin-bottom:6px;">
+      {% if h.url %}<a href="{{ h.url }}" style="color:#0b57d0;">{{ h.name }}</a>{% else %}{{ h.name }}{% endif %}
+      <span style="color:#666;">{{ h.price_text }}円</span>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p style="margin:0 0 20px;color:#888;">現在空室のある宿はありません。</p>
+  {% endif %}
+
+  <p style="margin:0 0 24px;">
+    <a href="{{ search_url }}"
+       style="display:inline-block;padding:11px 22px;background:#bf0000;color:#fff;text-decoration:none;border-radius:4px;font-weight:bold;">
+      楽天トラベルで見る
+    </a>
+  </p>
+
+  <p style="margin:0;padding-top:14px;border-top:1px solid #e3e3e3;color:#999;font-size:12px;">
+    本メールは自動送信です。<br>
+    確認日時: {{ now.strftime('%Y-%m-%d %H:%M') }}（日本時間）
+  </p>
+
+</div>

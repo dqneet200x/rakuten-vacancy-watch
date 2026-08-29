@@ -1,0 +1,86 @@
+name: 空室監視
+
+on:
+  # 5分ごとに実行する（GitHub Actions が許す最短の間隔）。
+  # "*/5" ではなく "2-59/5" にして毎時2,7,12…分に走らせている。
+  # 毎時0分ちょうどは GitHub 全体で実行が集中して遅延しやすいため、そこを避ける。
+  # 注意: それでも混雑時は数分〜十数分遅れることがある。
+  schedule:
+    - cron: "2-59/5 * * * *"
+
+  # Actions タブから手動でも実行できる（動作確認用）
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "メールを送らず、結果の確認だけ行う"
+        type: boolean
+        default: false
+
+# state ファイルをリポジトリに書き戻すために必要
+permissions:
+  contents: write
+
+# 前の実行が終わる前に次が始まって、二重に通知されるのを防ぐ
+concurrency:
+  group: vacancy-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    # 無料枠を無駄に消費しないよう、ハングしたら5分で打ち切る
+    timeout-minutes: 5
+
+    steps:
+      - name: リポジトリを取得
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Python を用意
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存パッケージをインストール
+        run: pip install --quiet -r requirements.txt
+
+      - name: 空室状況を確認する
+        env:
+          TZ: Asia/Tokyo
+          RAKUTEN_APPLICATION_ID: ${{ secrets.RAKUTEN_APPLICATION_ID }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          NOTIFY_TO: ${{ secrets.NOTIFY_TO }}
+        run: python main.py ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: 変化があれば state を保存する
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # 変化がなければコミットしない（履歴が膨らむのを防ぐ）
+          if [ -z "$(git status --porcelain -- state heartbeat.txt)" ]; then
+            echo "変化なし。コミットは行いません。"
+            exit 0
+          fi
+
+          git add -A state heartbeat.txt
+          # [skip ci] を付けて、このコミットが別のワークフローを起動しないようにする
+          git commit -m "chore: 空室状況を更新 [skip ci]"
+
+          # 同時実行などで push が競合したら、rebase して数回リトライする
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "保存しました。"
+              exit 0
+            fi
+            echo "push に失敗しました（${attempt}回目）。取り込み直して再試行します。"
+            git pull --rebase --autostash || true
+            sleep 5
+          done
+
+          echo "state の保存に失敗しました。次回の実行で再度保存を試みます。"
+          exit 1

@@ -1,0 +1,23 @@
+{# ============================================================
+   メールの「件名」テンプレート
+   ここを書き換えれば件名を自由に変えられます（1行で書いてください）。
+
+   使える変数:
+     area_name       監視エリア名（config.yaml の name）
+     stay_label      「9/20-21」のような短い日付表記
+     checkin         チェックイン日（2026-09-20）
+     checkout        チェックアウト日（2026-09-21）
+     nights          泊数
+     adult_num       大人の人数
+     room_num        部屋数
+     prev_count      前回の件数
+     curr_count      今回の件数
+     diff            増減数（数値。例: 2, -1）
+     diff_text       増減の符号付き表記（+2 / -1 / ±0）
+     direction       「増加」「減少」「入れ替わり」
+     direction_mark  「▲」「▼」「◆」
+     min_price_text  現在の最安料金（3桁区切り）
+     search_url      楽天トラベルの検索結果URL
+     now             実行日時。now.strftime('%m/%d %H:%M') のように書式指定できます
+   ============================================================ #}
+{{ direction_mark }}【楽天トラベル】{{ area_name }} {{ stay_label }} の空室 {{ prev_count }}件 → {{ curr_count }}件（{{ now.strftime('%m/%d %H:%M') }}）

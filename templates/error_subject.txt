@@ -1,0 +1,2 @@
+{# エラー通知の件名テンプレート。使える変数: area_name / watch_id / consecutive_failures / error_message / now #}
+【楽天トラベル監視】取得エラーが続いています（{{ area_name }}）
