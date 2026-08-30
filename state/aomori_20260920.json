@@ -1,18 +1,25 @@
 {
   "watch_id": "aomori_20260920",
-  "last_count": 1,
+  "last_count": 2,
   "hotels": [
+    {
+      "hotel_no": "1482",
+      "name": "ホテルＪＡＬシティ青森",
+      "price": 38500,
+      "url": "https://travel.rakuten.co.jp/HOTEL/1482/1482.html",
+      "review_average": 4.31
+    },
     {
       "hotel_no": "200696",
       "name": "スローハウス青森",
-      "price": 30160,
+      "price": 41324,
       "url": "https://travel.rakuten.co.jp/HOTEL/200696/200696.html",
       "review_average": 4.25
     }
   ],
-  "last_notified_hash": "d12972eec64ac5c2c23994893a180e8b35d57a4521a7bf01b5eabb911555b581",
-  "last_checked_at": "2026-08-30T11:18:25+09:00",
-  "last_change_at": "2026-08-30T11:18:25+09:00",
+  "last_notified_hash": "6305ecf35832e5abce67e02fdd59c4387b039852fd44608395a9439db1b896e1",
+  "last_checked_at": "2026-08-30T11:24:56+09:00",
+  "last_change_at": "2026-08-30T11:24:56+09:00",
   "consecutive_failures": 0,
   "last_error_mail_date": "",
   "source": "html"
