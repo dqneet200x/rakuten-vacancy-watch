@@ -1,25 +1,18 @@
 {
   "watch_id": "aomori_20260920",
-  "last_count": 2,
+  "last_count": 1,
   "hotels": [
-    {
-      "hotel_no": "78156",
-      "name": "まちなか温泉 青森センターホテル",
-      "price": 44170,
-      "url": "https://travel.rakuten.co.jp/HOTEL/78156/78156.html",
-      "review_average": 4.22
-    },
     {
       "hotel_no": "200696",
       "name": "スローハウス青森",
-      "price": 46970,
+      "price": 30160,
       "url": "https://travel.rakuten.co.jp/HOTEL/200696/200696.html",
       "review_average": 4.25
     }
   ],
-  "last_notified_hash": "36e7d9eb753ef52a03c49955cb937bbae1665f953cfe4cfc62a194bde274ac90",
-  "last_checked_at": "2026-08-30T19:39:00+09:00",
-  "last_change_at": "2026-08-30T19:39:00+09:00",
+  "last_notified_hash": "6d0b28f075a88265f190e7916cab4494e0807d500f55e0279c9a6fca70f4c2ee",
+  "last_checked_at": "2026-08-30T19:45:17+09:00",
+  "last_change_at": "2026-08-30T19:45:17+09:00",
   "consecutive_failures": 0,
   "last_error_mail_date": "",
   "source": "html"
