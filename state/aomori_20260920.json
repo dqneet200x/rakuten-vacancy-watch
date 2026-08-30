@@ -1,18 +1,32 @@
 {
   "watch_id": "aomori_20260920",
-  "last_count": 1,
+  "last_count": 3,
   "hotels": [
+    {
+      "hotel_no": "187620",
+      "name": "天然温泉 淡雪の湯 ドーミーイン青森（ドーミーイン・御宿野乃 ホテルズグループ）",
+      "price": 67100,
+      "url": "https://travel.rakuten.co.jp/HOTEL/187620/187620.html",
+      "review_average": 4.52
+    },
+    {
+      "hotel_no": "4814",
+      "name": "ホテル秋田屋 夕陽と陸奥湾を望む展望温泉",
+      "price": 68200,
+      "url": "https://travel.rakuten.co.jp/HOTEL/4814/4814.html",
+      "review_average": 3.98
+    },
     {
       "hotel_no": "200696",
       "name": "スローハウス青森",
-      "price": 30160,
+      "price": 72600,
       "url": "https://travel.rakuten.co.jp/HOTEL/200696/200696.html",
       "review_average": 4.25
     }
   ],
-  "last_notified_hash": "20ce07efd09cf1b35507b35d79f3ecc59953d55f9048fa24b705580e1bd1a635",
-  "last_checked_at": "2026-08-30T14:09:26+09:00",
-  "last_change_at": "2026-08-30T12:04:24+09:00",
+  "last_notified_hash": "47d275aabe63e9b3d7105c2723dde577513c3546680fa857b3fa5f4e838a4bf5",
+  "last_checked_at": "2026-08-30T14:15:58+09:00",
+  "last_change_at": "2026-08-30T14:15:58+09:00",
   "consecutive_failures": 0,
   "last_error_mail_date": "",
   "source": "html"
