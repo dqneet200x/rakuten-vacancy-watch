@@ -1,25 +1,18 @@
 {
   "watch_id": "aomori_20260920",
-  "last_count": 2,
+  "last_count": 1,
   "hotels": [
-    {
-      "hotel_no": "172789",
-      "name": "アートホテル青森",
-      "price": 57120,
-      "url": "https://travel.rakuten.co.jp/HOTEL/172789/172789.html",
-      "review_average": 4.2
-    },
     {
       "hotel_no": "200696",
       "name": "スローハウス青森",
-      "price": 60140,
+      "price": 30160,
       "url": "https://travel.rakuten.co.jp/HOTEL/200696/200696.html",
       "review_average": 4.25
     }
   ],
-  "last_notified_hash": "bdd3df77e818fcda731b2dc317a5aa8036090023b8c369cf6c62f7ead55506e9",
-  "last_checked_at": "2026-08-30T17:20:48+09:00",
-  "last_change_at": "2026-08-30T17:07:36+09:00",
+  "last_notified_hash": "cbb1058e616e23dfb89924f74223b3abfc554d454930c9872d20d7b8b39117df",
+  "last_checked_at": "2026-08-30T17:27:31+09:00",
+  "last_change_at": "2026-08-30T17:27:31+09:00",
   "consecutive_failures": 0,
   "last_error_mail_date": "",
   "source": "html"
