@@ -1,7 +1,14 @@
 {
   "watch_id": "aomori_20260920",
-  "last_count": 1,
+  "last_count": 2,
   "hotels": [
+    {
+      "hotel_no": "15969",
+      "name": "ホテルルートイン青森駅前",
+      "price": 42000,
+      "url": "https://travel.rakuten.co.jp/HOTEL/15969/15969.html",
+      "review_average": 4.1
+    },
     {
       "hotel_no": "200696",
       "name": "スローハウス青森",
@@ -10,9 +17,9 @@
       "review_average": 4.25
     }
   ],
-  "last_notified_hash": "fa4bbb80c1c5cb69c8be107a1fa6446b875e456cbf1664945819ef96a33910e3",
-  "last_checked_at": "2026-08-30T22:23:24+09:00",
-  "last_change_at": "2026-08-30T20:31:56+09:00",
+  "last_notified_hash": "69ec2641e58e1aaafa1d0b7ef48c1e6ed672cf92623d056871e1881746b14b7f",
+  "last_checked_at": "2026-08-30T22:29:51+09:00",
+  "last_change_at": "2026-08-30T22:29:51+09:00",
   "consecutive_failures": 0,
   "last_error_mail_date": "",
   "source": "html"
