@@ -1,6 +1,6 @@
 {
   "watch_id": "aomori_20260920",
-  "last_count": 3,
+  "last_count": 2,
   "hotels": [
     {
       "hotel_no": "187620",
@@ -10,23 +10,16 @@
       "review_average": 4.52
     },
     {
-      "hotel_no": "4814",
-      "name": "ホテル秋田屋 夕陽と陸奥湾を望む展望温泉",
-      "price": 68200,
-      "url": "https://travel.rakuten.co.jp/HOTEL/4814/4814.html",
-      "review_average": 3.98
-    },
-    {
       "hotel_no": "200696",
       "name": "スローハウス青森",
-      "price": 72600,
+      "price": 68200,
       "url": "https://travel.rakuten.co.jp/HOTEL/200696/200696.html",
       "review_average": 4.25
     }
   ],
-  "last_notified_hash": "47d275aabe63e9b3d7105c2723dde577513c3546680fa857b3fa5f4e838a4bf5",
-  "last_checked_at": "2026-08-30T14:15:58+09:00",
-  "last_change_at": "2026-08-30T14:15:58+09:00",
+  "last_notified_hash": "eed7bb632b6ea59d3b91f9d574602718ee58c230f1f7de9f5844ee305450b03b",
+  "last_checked_at": "2026-08-30T14:22:22+09:00",
+  "last_change_at": "2026-08-30T14:22:22+09:00",
   "consecutive_failures": 0,
   "last_error_mail_date": "",
   "source": "html"
